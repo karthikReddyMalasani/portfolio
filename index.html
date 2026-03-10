@@ -1,194 +1,905 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Karthik Kumar Reddy | Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-  <link rel="stylesheet" href="style.css" />
+  <title>Karthik Kumar Reddy | AI/ML Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0a0a0f',
+              light: '#f3f4f6',
+              primary: '#0ea5e9',
+              secondary: '#8b5cf6',
+              accent: '#22d3ee'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          },
+          animation: {
+            'glow-pulse': 'glow 3s ease-in-out infinite alternate',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            glow: {
+              '0%': { textShadow: '0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(139, 92, 246, 0.3)' },
+              '100%': { textShadow: '0 0 20px rgba(14, 165, 233, 0.8), 0 0 30px rgba(139, 92, 246, 0.6)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+    body {
+      background-color: #050505;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0f;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Particles Canvas */
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #0ea5e9, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: linear-gradient(90deg, #0ea5e9, #8b5cf6);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Floating Image Effect */
+    .hero-img-container {
+      position: relative;
+    }
+
+    .hero-img-container::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+      filter: blur(20px);
+      opacity: 0.5;
+      border-radius: 50%;
+      z-index: 0;
+      animation: glow-pulse 3s infinite alternate;
+    }
+
+    .timeline-dot {
+      box-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
+    }
+
+    .skill-bar-fill {
+      box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+    }
+
+    .project-card:hover {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
-<body>
 
-  <!-- CANVAS BG -->
-  <canvas id="bgCanvas"></canvas>
+<body class="font-sans antialiased text-slate-300">
 
-  <!-- NAVIGATION -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">Karthik<span>Reddy</span></div>
+  <!-- Particles Background container (handled by script.js) -->
+  <div id="tsparticles"></div>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#internships">Internships</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#contact">Contact</a></li>
-
-        <!-- RESUME DOWNLOAD -->
-        <li><a href="resume.pdf" download>📄 Download Resume</a></li>
-      </ul>
-
-      <div class="menu-toggle" id="menuToggle">&#9776;</div>
-    </nav>
-  </header>
-
-  <!-- HOME -->
-  <section id="home" class="hero fade-in">
-    <div class="hero-content">
-      <h1>Hi, I'm <span>Malasani Karthik Kumar Reddy</span></h1>
-      <p>B.Tech CSE Student passionate about AI, Web Development, and Innovative Tech Solutions.</p>
-      <img src="profile.jpg" alt="Profile" class="profile-img">
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="fade-in">
-    <h2 class="section-title">About Me</h2>
-    <p>
-      I'm a CSE student specializing in Artificial Intelligence & Machine Learning. 
-      I build intelligent, efficient, and impactful digital solutions for real-world problems.
-    </p>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills" class="fade-in colorful">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card"><i class="fab fa-java"></i> Java</div>
-      <div class="skill-card"><i class="fab fa-python"></i> Python</div>
-      <div class="skill-card"><i class="fas fa-code"></i> C</div>
-      <div class="skill-card"><i class="fab fa-html5"></i> HTML & CSS</div>
-      <div class="skill-card"><i class="fab fa-js-square"></i> JavaScript</div>
-      <div class="skill-card"><i class="fas fa-database"></i> MySQL</div>
-      <div class="skill-card"><i class="fab fa-github"></i> GitHub</div>
-      <div class="skill-card"><i class="fas fa-robot"></i> Machine Learning</div>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education" class="fade-in">
-    <h2 class="section-title">Education</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <h3>B.Tech in Computer Science (AI & ML)</h3>
-        <p>G. Pulla Reddy Engineering College | 2023–2027 | CGPA: 8.28</p>
-      </div>
-      <div class="timeline-item">
-        <h3>Intermediate (MPC)</h3>
-        <p>Sri Chaitanya Jr College, Tirupati | 2021–2023 | 95.7%</p>
-      </div>
-      <div class="timeline-item">
-        <h3>SSC</h3>
-        <p>Narayana e-Techno School, Tirupati | CGPA: 10/10</p>
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 glass-panel border-b border-white/10 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <div class="flex-shrink-0">
+          <a href="#" class="text-2xl font-bold font-mono tracking-tighter">
+            <span class="text-white">Karthik</span><span class="gradient-text">.AI</span>
+          </a>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-8">
+            <a href="#home"
+              class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+            <a href="#about"
+              class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+            <a href="#skills"
+              class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Skills</a>
+            <a href="#projects"
+              class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</a>
+            <a href="#education"
+              class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Education</a>
+          </div>
+        </div>
+        <!-- Mobile menu button -->
+        <div class="-mr-2 flex md:hidden">
+          <button type="button" id="mobile-menu-btn"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="fade-in colorful">
-    <h2 class="section-title">Projects</h2>
-
-    <div class="project-grid">
-
-      <!-- Vision Aid -->
-      <!-- <div class="project-card" onclick="openPopup('visionAidPopup')">
-        <h3><i class="fas fa-eye"></i> Vision Aid – AI-Powered Digital Spectacles</h3>
-        <p>Mobile-based AI solution for visual distortion correction.</p>
-      </div> -->
-
-      <!-- AI Healthcare -->
-      <div class="project-card" onclick="openPopup('healthcarePopup')">
-        <h3><i class="fas fa-heart-pulse"></i> AI Healthcare Assistant</h3>
-        <p>AI-based tool using Gemini API for health insights.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- INTERNSHIPS -->
-  <section id="internships" class="fade-in colorful">
-    <h2 class="section-title">Internships</h2>
-
-    <div class="project-grid">
-      <div class="project-card" onclick="openPopup('internshipPopup')">
-        <h3><i class="fas fa-briefcase"></i> IBM SkillBuild Virtual Internship</h3>
-        <p>AI & Cloud technologies internship at IBM SkillBuild.</p>
+    <!-- Mobile Menu -->
+    <div class="md:hidden hidden bg-slate-900/95 backdrop-blur-md absolute w-full border-b border-white/10"
+      id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-800">Home</a>
+        <a href="#about"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">About</a>
+        <a href="#skills"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Skills</a>
+        <a href="#projects"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Projects</a>
+        <a href="#education"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Education</a>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- ACHIEVEMENTS -->
-  <section id="achievements" class="fade-in">
-    <h2 class="section-title">Achievements & Certifications</h2>
-    <ul class="achievement-list">
-      <li>Certified in Java & Python – IIT Bombay Spoken Tutorials</li>
-      <li>Java Foundation Skills – Infosys Springboard</li>
-      <li>Fundamentals of AI – IBM SkillBuild</li>
-      <li>MySQL Certification – HackerRank</li>
-    </ul>
-  </section>
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
 
-  <!-- CONTACT -->
-  <section id="contact" class="fade-in colorful">
-    <h2 class="section-title">Contact</h2>
-    <div class="contact-box">
-      <p>📧 <a href="mailto:malasanikarthikkumarreddy@gmail.com">malasanikarthikkumarreddy@gmail.com</a></p>
-      <p>📞 <a href="tel:+919390524907">+91 93905 24907</a></p>
-      <p>🔗 
-        <a href="https://www.linkedin.com/in/karthik-kumar-reddy-malasani">LinkedIn</a> |
-        <a href="https://github.com/239x1a3360-MKKR">GitHub</a>
-      </p>
+          <div class="w-full lg:w-3/5 space-y-8 z-10 text-center lg:text-left">
+            <div
+              class="inline-block px-4 py-1.5 rounded-full border border-brand-primary/30 bg-brand-primary/10 text-brand-accent font-mono text-sm tracking-wide mb-4">
+              <i class="fas fa-robot mr-2"></i> AI/ML Student & Aspiring Developer
+            </div>
+            <h1
+              class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4 animate-glow-pulse">
+              Malasani Karthik <br />
+              <span class="gradient-text">Kumar Reddy</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+              I build intelligent, efficient, and impactful digital solutions using <span
+                class="text-white font-medium">Artificial Intelligence</span> and modern computational techniques.
+            </p>
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+              <a href="#contact"
+                class="px-8 py-3 rounded-full bg-white text-brand-dark font-bold hover:bg-gray-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                Connect With Me
+              </a>
+              <a href="#projects"
+                class="px-8 py-3 rounded-full border border-gray-600 text-white font-medium hover:border-brand-primary hover:text-brand-primary transition-all flex items-center">
+                View My Work <i class="fas fa-arrow-right ml-2 text-sm"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="w-2/3 max-w-sm lg:w-2/5 z-10 flex justify-center items-center">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 opacity-90 hover:opacity-100 transition-opacity">
+              <!-- Animated Glowing Rings -->
+              <div
+                class="absolute inset-0 rounded-full border-y-4 border-brand-primary animate-[spin_8s_linear_infinite] opacity-50 shadow-[0_0_20px_rgba(14,165,233,0.4)]">
+              </div>
+              <div
+                class="absolute inset-4 rounded-full border-x-4 border-brand-secondary animate-[spin_12s_linear_infinite_reverse] opacity-60 shadow-[0_0_20px_rgba(139,92,246,0.4)]">
+              </div>
+              <div
+                class="absolute inset-8 rounded-full border-4 border-brand-accent border-dashed animate-[spin_20s_linear_infinite] opacity-40">
+              </div>
+
+              <!-- Core Avatar Body -->
+              <div
+                class="absolute inset-12 bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 rounded-full animate-float flex items-center justify-center overflow-hidden shadow-[0_0_40px_rgba(14,165,233,0.5)] border border-slate-700 hover:scale-105 transition-transform duration-300">
+                <!-- Inner Robot/AI Icon -->
+                <i
+                  class="fas fa-user-astronaut text-7xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary drop-shadow-[0_0_15px_rgba(139,92,246,0.8)]"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+        <span class="text-slate-500 text-sm mb-2 font-mono">SCROLL</span>
+        <i class="fas fa-chevron-down text-brand-primary"></i>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative bg-slate-900/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-white inline-block relative">
+            About <span class="gradient-text">Me</span>
+            <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-brand-primary rounded-full">
+            </div>
+          </h2>
+        </div>
+        <div
+          class="glass-panel p-8 md:p-12 rounded-2xl border border-slate-700/50 text-center max-w-4xl mx-auto shadow-xl">
+          <p class="text-lg md:text-xl text-slate-300 leading-relaxed font-light">
+            To apply my technical knowledge, creativity, and problem-solving skills in real-world software projects. I
+            aim to contribute effectively to an innovative organization, learn emerging technologies, and grow as a
+            skilled software professional capable of designing impactful digital solutions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-white inline-block relative">
+            Technical <span class="gradient-text">Neural Net</span>
+            <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-brand-primary rounded-full">
+            </div>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Skill Card 1 -->
+          <div
+            class="glass-panel p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 group border border-slate-800 hover:border-brand-primary/50 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-20 h-20 bg-brand-primary/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <i class="fas fa-robot text-4xl text-brand-accent mb-4"></i>
+            <h3 class="text-xl font-bold text-white mb-2">AI & ML</h3>
+            <p class="text-sm text-slate-400 mb-4">NLP, DistilBERT, LLMs (Gemini API), Scikit-Learn.</p>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-1">
+              <div
+                class="bg-gradient-to-r from-brand-primary to-brand-secondary h-1.5 rounded-full skill-bar-fill w-[85%]">
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill Card 2 -->
+          <div
+            class="glass-panel p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 group border border-slate-800 hover:border-brand-primary/50 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-20 h-20 bg-brand-secondary/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <i class="fas fa-code text-4xl text-brand-secondary mb-4"></i>
+            <h3 class="text-xl font-bold text-white mb-2">Languages</h3>
+            <p class="text-sm text-slate-400 mb-4">Proficient in Python, Java, and C programming.</p>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-1">
+              <div class="bg-gradient-to-r from-brand-secondary to-pink-500 h-1.5 rounded-full skill-bar-fill w-[90%]">
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill Card 3 -->
+          <div
+            class="glass-panel p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 group border border-slate-800 hover:border-brand-primary/50 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <i class="fab fa-js text-4xl text-cyan-400 mb-4"></i>
+            <h3 class="text-xl font-bold text-white mb-2">Web Dev</h3>
+            <p class="text-sm text-slate-400 mb-4">HTML5, CSS3, JavaScript modern ES6+.</p>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-1">
+              <div class="bg-gradient-to-r from-cyan-400 to-blue-500 h-1.5 rounded-full skill-bar-fill w-[80%]"></div>
+            </div>
+          </div>
+
+          <!-- Skill Card 4 -->
+          <div
+            class="glass-panel p-6 rounded-2xl hover:-translate-y-2 transition-transform duration-300 group border border-slate-800 hover:border-brand-primary/50 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-20 h-20 bg-emerald-500/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <i class="fas fa-database text-4xl text-emerald-400 mb-4"></i>
+            <h3 class="text-xl font-bold text-white mb-2">Tools & DB</h3>
+            <p class="text-sm text-slate-400 mb-4">MySQL databases, Git/GitHub version control.</p>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 mb-1">
+              <div class="bg-gradient-to-r from-emerald-400 to-teal-500 h-1.5 rounded-full skill-bar-fill w-[75%]">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative bg-slate-900/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-white inline-block relative">
+            Innovation <span class="gradient-text">Hub</span>
+            <div
+              class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-brand-secondary rounded-full">
+            </div>
+          </h2>
+          <p class="mt-6 text-slate-400">Recent projects exploring artificial intelligence and natural language
+            processing.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Project 1 -->
+          <div class="glass-panel rounded-2xl overflow-hidden group project-card border border-slate-700/50">
+            <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-purple-900/40 opacity-50 group-hover:opacity-100 transition-opacity">
+              </div>
+              <i
+                class="fas fa-heartbeat text-7xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+              <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-900 to-transparent"></div>
+            </div>
+            <div class="p-8 relative">
+              <div
+                class="absolute top-0 right-8 -translate-y-1/2 w-12 h-12 bg-slate-800 border border-slate-600 rounded-full flex items-center justify-center text-brand-accent shadow-lg">
+                <i class="fas fa-pills"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-3">AI Healthcare Assistant</h3>
+              <p class="text-slate-400 mb-6 line-clamp-3">
+                Intelligent health diagnostic tool powered by the Gemini AI API. It analyzes user-inputted symptoms to
+                provide medical insights and initial guidance before consulting a professional.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span
+                  class="px-3 py-1 text-xs font-mono rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20">Gemini
+                  API</span>
+                <span
+                  class="px-3 py-1 text-xs font-mono rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20">Python</span>
+                <span
+                  class="px-3 py-1 text-xs font-mono rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20">Prompt
+                  Engineering</span>
+              </div>
+              <button onclick="openModal('modal-healthcare')"
+                class="inline-flex items-center gap-2 text-brand-primary hover:text-white transition-colors font-medium mt-2 focus:outline-none">
+                View Project <i class="fas fa-play-circle text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="glass-panel rounded-2xl overflow-hidden group project-card border border-slate-700/50">
+            <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-teal-900/40 opacity-50 group-hover:opacity-100 transition-opacity">
+              </div>
+              <i
+                class="fas fa-brain text-7xl text-white/20 group-hover:scale-110 transition-transform duration-500"></i>
+              <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-900 to-transparent"></div>
+            </div>
+            <div class="p-8 relative">
+              <div
+                class="absolute top-0 right-8 -translate-y-1/2 w-12 h-12 bg-slate-800 border border-slate-600 rounded-full flex items-center justify-center text-emerald-400 shadow-lg">
+                <i class="fas fa-book-open"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-3">NLP Book Summarization</h3>
+              <p class="text-slate-400 mb-6 line-clamp-3">
+                Built an advanced summarization pipeline employing DistilBERT for text reduction. Features Mermaid.js
+                for conceptual mind map generation and a RAG-based chatbot for answering specific queries regarding the
+                text.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span
+                  class="px-3 py-1 text-xs font-mono rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">DistilBERT</span>
+                <span
+                  class="px-3 py-1 text-xs font-mono rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">RAG</span>
+                <span
+                  class="px-3 py-1 text-xs font-mono rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Mermaid.js</span>
+              </div>
+              <button onclick="openModal('modal-nlp')"
+                class="inline-flex items-center gap-2 text-emerald-400 hover:text-white transition-colors font-medium mt-2 focus:outline-none">
+                View Project <i class="fas fa-play-circle text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Timeline Section -->
+    <section id="education" class="py-24 relative">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-white inline-block relative">
+            Academic <span class="gradient-text">Milestones</span>
+            <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-brand-primary rounded-full">
+            </div>
+          </h2>
+        </div>
+
+        <div class="relative border-l-2 border-slate-700 ml-3 md:ml-6 space-y-12">
+
+          <!-- Ed 1 -->
+          <div class="relative pl-8 md:pl-12">
+            <div
+              class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-brand-primary timeline-dot border-4 border-slate-900">
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-slate-700/50 relative">
+              <span
+                class="absolute -top-3 left-6 px-3 py-1 bg-slate-800 border border-slate-600 text-xs font-mono rounded-full text-brand-accent">2023
+                - 2027</span>
+              <h3 class="text-xl font-bold text-white mt-2">B.Tech in Computer Science (AI & ML)</h3>
+              <p class="text-lg text-brand-light font-medium mt-1">G. Pulla Reddy Engineering College</p>
+              <p class="text-slate-400 mt-2 font-mono"><i class="fas fa-star text-yellow-500 mr-2"></i>CGPA: 8.28</p>
+            </div>
+          </div>
+
+          <!-- Ed 2 -->
+          <div class="relative pl-8 md:pl-12">
+            <div
+              class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-brand-secondary timeline-dot border-4 border-slate-900">
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-slate-700/50 relative">
+              <span
+                class="absolute -top-3 left-6 px-3 py-1 bg-slate-800 border border-slate-600 text-xs font-mono rounded-full text-brand-secondary">2021
+                - 2023</span>
+              <h3 class="text-xl font-bold text-white mt-2">Intermediate (MPC)</h3>
+              <p class="text-lg text-brand-light font-medium mt-1">Sri Chaitanya Jr College, Tirupati</p>
+              <p class="text-slate-400 mt-2 font-mono"><i class="fas fa-star text-yellow-500 mr-2"></i>Score: 95.7%</p>
+            </div>
+          </div>
+
+          <!-- Ed 3 -->
+          <div class="relative pl-8 md:pl-12">
+            <div
+              class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-brand-primary timeline-dot border-4 border-slate-900">
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-slate-700/50 relative">
+              <h3 class="text-xl font-bold text-white mt-2">Secondary School Certificate</h3>
+              <p class="text-lg text-brand-light font-medium mt-1">Narayana e-Techno School, Tirupati</p>
+              <p class="text-slate-400 mt-2 font-mono"><i class="fas fa-star text-yellow-500 mr-2"></i>CGPA: 10/10</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Achievements & Internships -->
+    <section class="py-24 relative bg-slate-900/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+          <!-- Internships -->
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-8 flex items-center">
+              <i class="fas fa-briefcase text-brand-secondary mr-3"></i> Internships
+            </h2>
+            <div class="glass-panel p-6 rounded-xl border-l-4 border-l-brand-secondary relative overflow-hidden group">
+              <div
+                class="absolute inset-0 bg-brand-secondary/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              </div>
+              <h3 class="text-xl font-bold text-white">IBM SkillBuild Virtual Internship <span
+                  class="text-sm font-normal text-slate-400 ml-2">(2025)</span></h3>
+              <p class="text-brand-light mt-2 font-medium">Artificial Intelligence & Cloud Technologies</p>
+              <p class="text-slate-400 mt-4 text-sm">Gained practical exposure to enterprise AI solutions and cloud
+                deployment strategies utilizing IBM's robust technological ecosystem.</p>
+              <a href="IBM_internship.pdf" target="_blank"
+                class="relative z-10 inline-block mt-4 text-sm font-mono text-brand-secondary hover:text-white transition-colors">
+                <i class="fas fa-external-link-alt mr-1"></i> View Internship Certificate
+              </a>
+            </div>
+          </div>
+
+          <!-- Achievements & Certifications -->
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-8 flex items-center">
+              <i class="fas fa-trophy text-yellow-500 mr-3"></i> Achievements & Certifications
+            </h2>
+            <div class="space-y-4">
+              <!-- 1st Prize -->
+              <div
+                class="glass-panel px-6 py-4 rounded-xl flex items-start gap-4 hover:bg-slate-800/50 transition-colors">
+                <div
+                  class="mt-1 w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-500 flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-medal"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">1st Prize Winner</h4>
+                  <p class="text-sm text-slate-400">Think2Impact 2026 Industry Problem Solving Workshop.</p>
+                </div>
+              </div>
+
+              <!-- Coursera Certifications -->
+              <div
+                class="glass-panel px-6 py-4 rounded-xl flex items-start gap-4 hover:bg-slate-800/50 transition-colors">
+                <div
+                  class="mt-1 w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-award"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">Coursera ML Specialization</h4>
+                  <p class="text-sm text-slate-400">DeepLearning.AI & Stanford University.</p>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="Coursera TEE25BSQBEAT.pdf" target="_blank"
+                      class="text-xs font-mono text-blue-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Supervised ML
+                    </a>
+                    <a href="Coursera XNXYXS3WR0O4.pdf" target="_blank"
+                      class="text-xs font-mono text-blue-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Advanced Learning Algorithms
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Java & Python Certification -->
+              <div
+                class="glass-panel px-6 py-4 rounded-xl flex items-start gap-4 hover:bg-slate-800/50 transition-colors">
+                <div
+                  class="mt-1 w-8 h-8 rounded-full bg-brand-primary/20 text-brand-primary flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-certificate"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">Java & Python Certification</h4>
+                  <p class="text-sm text-slate-400">IIT Bombay Spoken Tutorials.</p>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="KARTHIK-KUMAR-REDDY-MALASANI-Participant-Certificate (2).pdf" target="_blank"
+                      class="text-xs font-mono text-brand-primary hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Java Cert
+                    </a>
+                    <a href="KARTHIK-KUMAR-REDDY-MALASANI-Participant-Certificate.pdf" target="_blank"
+                      class="text-xs font-mono text-brand-primary hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Python Cert
+                    </a>
+                    <a href="KARTHIK-KUMAR-REDDY-MALASANI-Participant-Certificate (1).pdf" target="_blank"
+                      class="text-xs font-mono text-brand-primary hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> HTML Cert
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- HackerRank Certifications -->
+              <div
+                class="glass-panel px-6 py-4 rounded-xl flex items-start gap-4 hover:bg-slate-800/50 transition-colors">
+                <div
+                  class="mt-1 w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center flex-shrink-0">
+                  <i class="fab fa-hackerrank text-lg"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">HackerRank Certifications</h4>
+                  <p class="text-sm text-slate-400">Basic Programming & Database Skills.</p>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="239X1A3360-HACKERRANK-java_basic certificate (1).pdf" target="_blank"
+                      class="text-xs font-mono text-green-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Java
+                    </a>
+                    <a href="239X1A3360-HACKERANK-python_basic certificate (1).pdf" target="_blank"
+                      class="text-xs font-mono text-green-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Python
+                    </a>
+                    <a href="239X1A3360-HACKERRANK sql_basic certificate.pdf" target="_blank"
+                      class="text-xs font-mono text-green-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> MySQL
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Core Foundation Skills -->
+              <div
+                class="glass-panel px-6 py-4 rounded-xl flex items-start gap-4 hover:bg-slate-800/50 transition-colors">
+                <div
+                  class="mt-1 w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">Core Foundation Skills</h4>
+                  <p class="text-sm text-slate-400">Infosys Springboard & IBM SkillBuild.</p>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    <a href="239X1A3360-INFOSYSSPRINGBOARD-PROGRAMMING USING JAVA.pdf" target="_blank"
+                      class="text-xs font-mono text-emerald-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Infosys Java
+                    </a>
+                    <a href="239X1A3360-INFOSYSSPRINGBOARD-PYTHON FOUNDATION CERTIFICATION.pdf" target="_blank"
+                      class="text-xs font-mono text-emerald-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> Infosys Python
+                    </a>
+                    <a href="Articial Intelligence Primer Certication.pdf" target="_blank"
+                      class="text-xs font-mono text-emerald-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> IBM AI Primer
+                    </a>
+                    <a href="Principles of Generative AI Certication.pdf" target="_blank"
+                      class="text-xs font-mono text-emerald-400 hover:text-white transition-colors">
+                      <i class="fas fa-external-link-alt mr-1"></i> IBM Gen AI
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Connect / Contact -->
+    <section id="contact" class="py-24 relative">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
+          Ready to <span class="gradient-text">Collaborate?</span>
+        </h2>
+        <p class="text-slate-400 mb-12 max-w-2xl mx-auto">
+          Currently seeking internship opportunities to apply my skills in AI, ML, and Software Engineering. I'm always
+          open to discussing new projects and ideas.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-6">
+          <a href="mailto:malasanikarthikkumarreddy@gmail.com"
+            class="group relative px-6 py-4 glass-panel rounded-xl flex items-center gap-4 hover:-translate-y-1 transition-all border border-slate-700 hover:border-brand-primary min-w-[250px] justify-center text-white">
+            <div
+              class="absolute inset-0 bg-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+            </div>
+            <i class="fas fa-envelope text-2xl text-slate-300 group-hover:text-brand-primary transition-colors"></i>
+            <span class="font-mono text-sm sm:text-base hidden sm:inline">Email Me</span>
+          </a>
+
+          <a href="tel:+919390524907"
+            class="group relative px-6 py-4 glass-panel rounded-xl flex items-center gap-4 hover:-translate-y-1 transition-all border border-slate-700 hover:border-emerald-500 min-w-[250px] justify-center text-white">
+            <div
+              class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+            </div>
+            <i class="fas fa-phone text-2xl text-slate-300 group-hover:text-emerald-500 transition-colors"></i>
+            <span class="font-mono text-sm sm:text-base hidden sm:inline">Call Me</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/karthik-kumar-reddy-malasani/" target="_blank"
+            class="group relative px-6 py-4 glass-panel rounded-xl flex items-center gap-4 hover:-translate-y-1 transition-all border border-slate-700 hover:border-blue-500 min-w-[250px] justify-center text-white">
+            <div
+              class="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+            </div>
+            <i class="fab fa-linkedin text-2xl text-slate-300 group-hover:text-blue-500 transition-colors"></i>
+            <span class="font-mono text-sm sm:text-base hidden sm:inline">LinkedIn Profile</span>
+          </a>
+
+          <a href="https://github.com/karthikReddyMalasani" target="_blank"
+            class="group relative px-6 py-4 glass-panel rounded-xl flex items-center gap-4 hover:-translate-y-1 transition-all border border-slate-700 hover:border-white min-w-[250px] justify-center text-white">
+            <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+            </div>
+            <i class="fab fa-github text-2xl text-slate-300 group-hover:text-white transition-colors"></i>
+            <span class="font-mono text-sm sm:text-base hidden sm:inline">GitHub Repo</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Modals -->
+    <!-- AI Healthcare Assistant Modal -->
+    <div id="modal-healthcare"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300 overflow-y-auto">
+      <div
+        class="relative w-full max-w-4xl bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 my-auto">
+        <div class="flex justify-between items-center p-4 border-b border-slate-800 bg-slate-800/50">
+          <h3 class="text-xl font-bold text-white">AI Healthcare Assistant</h3>
+          <button onclick="closeModal('modal-healthcare')" class="text-slate-400 hover:text-white transition-colors">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div class="p-2 md:p-6 aspect-video">
+          <iframe src="https://drive.google.com/file/d/1NzvVTzs7XgsxzIuwyiocLPqxDPfera_r/preview" width="100%"
+            height="100%" allow="autoplay" class="rounded-lg bg-black"></iframe>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <footer align="center">© 2025 Karthik Kumar Reddy Portfolio</footer>
-
-  <button id="scrollTop">⬆</button>
-
-  <!-- POPUPS -->
-  <!-- Vision Aid -->
-  <div id="visionAidPopup" class="popup-overlay">
-    <div class="popup-box">
-      <span class="close-btn" onclick="closePopup('visionAidPopup')">&times;</span>
-      <h2>Vision Aid – AI-Powered Digital Spectacles</h2>
-      <p>
-        Developed a mobile-based solution that uses real-time image processing to correct
-        visual distortion for users without spectacles. Designed to provide accessibility,
-        affordability, and inclusivity through smartphone technology.
-      </p>
+    <!-- NLP Book Summarization Modal -->
+    <div id="modal-nlp"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300 overflow-y-auto">
+      <div
+        class="relative w-full max-w-4xl bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 my-auto">
+        <div class="flex justify-between items-center p-4 border-b border-slate-800 bg-slate-800/50">
+          <h3 class="text-xl font-bold text-white">NLP Book Summarization</h3>
+          <button onclick="closeModal('modal-nlp')" class="text-slate-400 hover:text-white transition-colors">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div class="p-2 md:p-6 aspect-video">
+          <iframe src="https://drive.google.com/file/d/1JvBA_kk5PW6ExVJL0Ph3ojG8mHaLiD66/preview" width="100%"
+            height="100%" allow="autoplay" class="rounded-lg bg-black"></iframe>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <!-- AI Healthcare -->
-  <div id="healthcarePopup" class="popup-overlay">
-    <div class="popup-box">
-      <span class="close-btn" onclick="closePopup('healthcarePopup')">&times;</span>
-      <h2>AI Healthcare Assistant</h2>
-      <p>
-        An AI-based tool integrated with the Gemini API to analyze health symptoms and
-        provide insights.
-      </p>
-    </div>
-  </div>
+  <footer class="border-t border-slate-800 glass-panel py-8 relative z-10 text-center text-slate-500 text-sm font-mono">
+    <p>Designed and Built by Malasani Karthik Kumar Reddy</p>
+    <p class="mt-2 text-xs opacity-50">&copy; 2026 All Rights Reserved.</p>
+  </footer>
 
-  <!-- Internship -->
-  <div id="internshipPopup" class="popup-overlay">
-    <div class="popup-box">
-      <span class="close-btn" onclick="closePopup('internshipPopup')">&times;</span>
-      <h2>IBM SkillBuild Virtual Internship (AI & Cloud Technologies) | 2025</h2>
-      <p>
-        Worked on developing AI-driven and cloud-based applications using IBM tools. 
-        Gained hands-on experience in model deployment, API integration, and scalable 
-        software solutions.
-      </p>
-    </div>
-  </div>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-links@2/tsparticles.preset.links.min.js"></script>
+  <script>
+    // Modal Functions
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      // small delay to allow display flex to apply before transitioning opacity/transform
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.children[0].classList.remove('scale-95');
+        modal.children[0].classList.add('scale-100');
+      }, 10);
+      document.body.style.overflow = 'hidden'; // prevent background scrolling
+    }
 
-  <script src="script.js"></script>
-  <script src="particles.js"></script>
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.add('opacity-0');
+      modal.children[0].classList.remove('scale-100');
+      modal.children[0].classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = 'auto'; // allow background scrolling
+      }, 300);
 
+      // Try to pause any playing video by iframe reload
+      const iframe = modal.querySelector('iframe');
+      if (iframe) {
+        const src = iframe.src;
+        iframe.src = src;
+      }
+    }
+
+    // Close modals on clicking outside
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('.fixed.inset-0.z-\\[100\\]')) {
+        closeModal(e.target.id);
+      }
+    });
+
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    });
+
+    // Navbar blur and border on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 20) {
+        nav.classList.add('bg-slate-900/80', 'backdrop-blur-md', 'shadow-lg');
+      } else {
+        nav.classList.remove('bg-slate-900/80', 'backdrop-blur-md', 'shadow-lg');
+      }
+    });
+
+    // Initialize Particles.js (AI Neural Network Theme)
+    tsParticles.load("tsparticles", {
+      preset: "links",
+      background: {
+        color: {
+          value: "#050505",
+        },
+      },
+      particles: {
+        number: {
+          value: 60,
+          density: {
+            enable: true,
+            area: 800,
+          },
+        },
+        color: {
+          value: ["#0ea5e9", "#8b5cf6", "#22d3ee"],
+        },
+        links: {
+          color: "rgba(14, 165, 233, 0.4)",
+          distance: 150,
+          enable: true,
+          opacity: 0.4,
+          width: 1,
+        },
+        move: {
+          enable: true,
+          speed: 1,
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: "out",
+        },
+        size: {
+          value: { min: 1, max: 3 },
+        },
+        opacity: {
+          value: 0.7,
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: {
+            enable: true,
+            mode: "grab",
+          },
+          onClick: {
+            enable: true,
+            mode: "push",
+          },
+        },
+        modes: {
+          grab: {
+            distance: 200,
+            links: {
+              opacity: 0.7,
+              color: "#8b5cf6"
+            },
+          },
+          push: {
+            quantity: 4,
+          },
+        },
+      },
+    });
+  </script>
 </body>
+
 </html>
