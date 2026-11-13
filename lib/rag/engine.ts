@@ -225,3 +225,4 @@ ${context}`
   const answer = synthesizeLocalAnswer(query, scoredChunks)
   return { answer, sources }
 }
+

@@ -123,3 +123,4 @@ Availability: Open to full-time Software Engineer / AI-ML roles (graduating 2027
     keywords: ['contact', 'email', 'phone', 'call', 'linkedin', 'github', 'hire', 'location', 'reach out', 'number', 'address', 'available']
   }
 ]
+
