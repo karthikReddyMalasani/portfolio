@@ -2,6 +2,7 @@ import styles from './page.module.css'
 import VideoIntro from '@/components/VideoIntro/VideoIntro'
 import About from '@/components/sections/About'
 import Projects from '@/components/sections/Projects'
+import InteractiveRAG from '@/components/sections/InteractiveRAG'
 import Skills from '@/components/sections/Skills'
 import Contact from '@/components/sections/Contact'
 import AIChat from '@/components/AIChat/AIChat'
@@ -12,6 +13,7 @@ export default function Home() {
       <VideoIntro />
       <About />
       <Projects />
+      <InteractiveRAG />
       <Skills />
       <Contact />
       <AIChat />

@@ -1,0 +1,425 @@
+.section {
+  background: var(--bg-dark);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--glass-border), transparent);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.2rem;
+}
+
+.liveBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0, 245, 155, 0.1);
+  border: 1px solid rgba(0, 245, 155, 0.3);
+  color: #00F59B;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+.liveDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00F59B;
+  box-shadow: 0 0 6px #00F59B;
+}
+
+.heading {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 1.2rem;
+}
+
+.sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+/* ─── Main Interactive Console ── */
+.consoleWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+/* Left: Query Builder & Suggested Prompts */
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  border-radius: 12px;
+  padding: 1.1rem 3.8rem 1.1rem 1.2rem;
+  font-size: 0.9rem;
+  color: #fff;
+  outline: none;
+  transition: all 0.25s;
+}
+
+.searchInput:focus {
+  border-color: var(--orange);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 25px rgba(255, 107, 53, 0.2);
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.submitBtn {
+  position: absolute;
+  right: 0.6rem;
+  background: var(--orange);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--orange-glow);
+  transform: scale(1.05);
+}
+
+.submitBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Category Filters */
+.categoryTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tabBtn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tabBtn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.tabActive {
+  background: rgba(255, 107, 53, 0.15);
+  border-color: rgba(255, 107, 53, 0.4);
+  color: var(--orange);
+}
+
+/* Prompt Card List */
+.promptsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.promptCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.promptCard:hover {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: rgba(255, 107, 53, 0.35);
+  transform: translateX(4px);
+}
+
+.promptActive {
+  background: rgba(255, 107, 53, 0.12);
+  border-color: var(--orange);
+}
+
+.promptQuestion {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.promptArrow {
+  color: var(--orange);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.promptCard:hover .promptArrow {
+  transform: translateX(3px);
+}
+
+/* Right: RAG Terminal Screen */
+.terminalCard {
+  padding: 1.8rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  position: relative;
+}
+
+/* Telemetry Header */
+.telemetryBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.telemetryLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.telemetryTag {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  color: var(--orange);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.telemetryRight {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: monospace;
+}
+
+.questionDisplay {
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.88rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Answer Body */
+.answerScroll {
+  flex: 1;
+  overflow-y: auto;
+  line-height: 1.65;
+  font-size: 0.88rem;
+  color: rgba(245, 245, 240, 0.9);
+  padding-right: 0.5rem;
+}
+
+.answerScroll strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.answerScroll a {
+  color: var(--orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.answerScroll ul, .answerScroll ol {
+  padding-left: 1.3rem;
+  margin: 0.5rem 0;
+}
+
+.answerScroll li {
+  margin-bottom: 0.4rem;
+}
+
+/* Loading State */
+.loadingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.loadingSpinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 107, 53, 0.15);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Retrieved Sources Footer */
+.sourcesSection {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sourcesTitle {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.sourcesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.sourcePill {
+  font-size: 0.68rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sourcePillDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+/* Action CTA Bar */
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.actionBtn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+}
+
+.actionPrimary {
+  background: var(--orange);
+  color: #fff;
+}
+.actionPrimary:hover {
+  background: var(--orange-glow);
+  transform: translateY(-2px);
+}
+
+.actionSecondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+.actionSecondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 960px) {
+  .consoleWrapper {
+    grid-template-columns: 1fr;
+  }
+  .section {
+    padding: 5rem 0;
+  }
+}
