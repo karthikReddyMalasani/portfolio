@@ -76,48 +76,101 @@ export default function Contact() {
       return
     }
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
-    if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
-      setErrorMsg('Web3Forms access key is missing. Please configure NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY in your .env.local file.')
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+    // If EmailJS credentials are provided, send via EmailJS API
+    if (serviceId && templateId && publicKey) {
+      setSubmitting(true)
+      setErrorMsg('')
+
+      try {
+        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            service_id: serviceId,
+            template_id: templateId,
+            user_id: publicKey,
+            template_params: {
+              name: form.name.trim(),
+              from_name: form.name.trim(),
+              user_name: form.name.trim(),
+              email: form.email.trim(),
+              from_email: form.email.trim(),
+              user_email: form.email.trim(),
+              reply_to: form.email.trim(),
+              message: form.message.trim(),
+            },
+          }),
+        })
+
+        if (response.ok) {
+          gsap.to('[data-form]', {
+            opacity: 0,
+            y: -10,
+            duration: 0.4,
+            ease: 'power2.in',
+            onComplete: () => setSent(true),
+          })
+        } else {
+          const errText = await response.text()
+          setErrorMsg(errText || 'Failed to send message via EmailJS. Please try again or reach out directly.')
+        }
+      } catch {
+        setErrorMsg('Failed to send message. Please check your connection.')
+      } finally {
+        setSubmitting(false)
+      }
       return
     }
 
-    setSubmitting(true)
-    setErrorMsg('')
+    // Alternative fallback: Web3Forms if configured
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    if (accessKey && accessKey !== 'YOUR_ACCESS_KEY_HERE') {
+      setSubmitting(true)
+      setErrorMsg('')
 
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: accessKey,
-          name: form.name.trim(),
-          email: form.email.trim(),
-          message: form.message.trim(),
-        }),
-      })
-
-      const data = await response.json()
-
-      if (data.success) {
-        gsap.to('[data-form]', {
-          opacity: 0,
-          y: -10,
-          duration: 0.4,
-          ease: 'power2.in',
-          onComplete: () => setSent(true),
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            name: form.name.trim(),
+            email: form.email.trim(),
+            message: form.message.trim(),
+          }),
         })
-      } else {
-        setErrorMsg(data.message || 'Something went wrong. Please try again.')
+
+        const data = await response.json()
+
+        if (data.success) {
+          gsap.to('[data-form]', {
+            opacity: 0,
+            y: -10,
+            duration: 0.4,
+            ease: 'power2.in',
+            onComplete: () => setSent(true),
+          })
+        } else {
+          setErrorMsg(data.message || 'Something went wrong. Please try again.')
+        }
+      } catch {
+        setErrorMsg('Failed to send message. Please check your connection.')
+      } finally {
+        setSubmitting(false)
       }
-    } catch {
-      setErrorMsg('Failed to send message. Please check your connection.')
-    } finally {
-      setSubmitting(false)
+      return
     }
+
+    setErrorMsg('Email service is not configured. Please add NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in your .env.local file.')
   }
 
   return (
