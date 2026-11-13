@@ -1,0 +1,420 @@
+/* ─── Hero Shell ────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #060606;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ─── Background ambient video ───────────────────────── */
+.bgVideo {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  filter: blur(44px) brightness(0.25) saturate(0.7);
+  transform: scale(1.05);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── Foreground main video ──────────────────────────── */
+.fgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+/* ─── Cinematic overlay system ───────────────────────── */
+.overlayVignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 120% 100% at 50% 50%,
+    transparent 30%,
+    rgba(6, 6, 6, 0.55) 65%,
+    rgba(6, 6, 6, 0.88) 100%
+  );
+}
+
+.overlayBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(6, 6, 6, 1) 0%,
+    rgba(6, 6, 6, 0.85) 25%,
+    rgba(6, 6, 6, 0.3) 60%,
+    transparent 100%
+  );
+}
+
+.overlayTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 6, 6, 0.6) 0%,
+    transparent 100%
+  );
+}
+
+.overlaySides {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(to right,  rgba(6,6,6,0.85) 0%,   transparent 35%),
+    linear-gradient(to left,   rgba(6,6,6,0.6)  0%,   transparent 35%);
+}
+
+/* ─── Content ────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 7% 0 8%;
+  max-width: 900px;
+  pointer-events: auto;
+}
+
+.tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.6rem;
+  position: relative;
+}
+
+.tagline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(to right, var(--orange), transparent);
+}
+
+/* ─── Name typography ────────────────────────────────── */
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.92;
+  margin-bottom: 1.8rem;
+}
+
+.firstName {
+  font-size: clamp(5rem, 13vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  /* Subtle text shadow for depth */
+  text-shadow:
+    0 0 80px rgba(255, 107, 53, 0.15),
+    0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.lastName {
+  font-size: clamp(3rem, 8.5vw, 7rem);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  line-height: 1.0;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+
+/* ─── Subtitle ───────────────────────────────────────── */
+.subtitle {
+  font-size: clamp(0.8rem, 1.3vw, 1rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin-bottom: 2.4rem;
+  letter-spacing: 0.01em;
+}
+
+.desktopBr {
+  display: inline;
+}
+
+/* ─── CTA buttons ────────────────────────────────────── */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.7rem;
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 0 0 var(--orange-dim);
+}
+
+.ctaPrimary:hover {
+  background: var(--orange-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+}
+
+.ctaOutline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.73rem 1.5rem;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.04);
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.ctaOutline:hover {
+  border-color: var(--orange-dim);
+  color: var(--orange-glow);
+  transform: translateY(-2px);
+}
+
+/* ─── Glassmorphism controls ─────────────────────────── */
+.controls {
+  position: absolute;
+  bottom: 2.6rem;
+  right: 2.6rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(14, 14, 14, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-radius: 50px;
+  padding: 0.35rem;
+  overflow: hidden;
+}
+
+.controlBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.controlBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--orange-glow);
+  transform: scale(1.08);
+}
+
+.controlBtn:active {
+  transform: scale(0.94);
+}
+
+.controlDivider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 0.1rem;
+}
+
+/* ─── Sound badge ────────────────────────────────────── */
+.soundBadge {
+  position: absolute;
+  bottom: 5.5rem;
+  right: 2.6rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.9rem;
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.soundPulse {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.6);
+  animation: soundPing 1.6s ease-in-out infinite;
+}
+
+@keyframes soundPing {
+  0%   { box-shadow: 0 0 0 0   rgba(255, 107, 53, 0.6); }
+  70%  { box-shadow: 0 0 0 7px rgba(255, 107, 53, 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(255, 107, 53, 0);   }
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .content {
+    padding: 0 5%;
+  }
+
+  .fgVideo {
+    object-position: 65% top;
+  }
+
+  .overlaySides {
+    background:
+      linear-gradient(to right,  rgba(6,6,6,0.95) 0%,   rgba(6,6,6,0.4) 50%, transparent 100%),
+      linear-gradient(to left,   rgba(6,6,6,0.5)  0%,   transparent 30%);
+  }
+
+  .lastName {
+    letter-spacing: 0.06em;
+  }
+
+  .subtitle {
+    font-size: 0.78rem;
+  }
+
+  .desktopBr {
+    display: none;
+  }
+
+  .controls {
+    right: 1.2rem;
+    bottom: 1.8rem;
+  }
+
+  .soundBadge {
+    right: 1.2rem;
+    bottom: 4.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .firstName {
+    font-size: 4.2rem;
+  }
+  .lastName {
+    font-size: 2.8rem;
+  }
+  .ctaPrimary,
+  .ctaOutline {
+    font-size: 0.72rem;
+    padding: 0.65rem 1.2rem;
+  }
+}
+
+/* ─── Resume Modal/Overlay ──────────────────────────────── */
+.resumeOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.35s ease-out;
+}
+
+.resumeContainer {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 90vh;
+  background: #111111;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.resumeCloseBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.resumeCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.resumeIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}

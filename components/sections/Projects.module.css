@@ -1,0 +1,187 @@
+.section {
+  background: var(--bg-dark);
+  padding: 8rem 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 6%;
+}
+
+.header {
+  margin-bottom: 4rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.2rem;
+}
+
+.heading {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+/* ─── Card grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 960px;
+}
+
+.card {
+  position: relative;
+  padding: 2rem 2.2rem 1.8rem;
+  overflow: hidden;
+  transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: default;
+}
+
+.card:hover {
+  border-color: rgba(255,255,255,0.18);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--orange-dim);
+}
+
+.cardFeatured {
+  border-color: rgba(255, 107, 53, 0.22);
+  background: rgba(255, 107, 53, 0.04);
+}
+
+/* Subtle orange accent bar on left */
+.cardAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to bottom, var(--accent, var(--orange)), transparent);
+  transition: height 0.5s var(--ease-out-expo);
+}
+
+.card:hover .cardAccent {
+  height: 100%;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.number {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.status {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, var(--orange));
+  border: 1px solid currentColor;
+  padding: 0.2rem 0.55rem;
+  border-radius: 50px;
+  opacity: 0.7;
+}
+
+.cardTitle {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.cardSub {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent, var(--orange));
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.cardDesc {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.pill {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.22rem 0.6rem;
+  border-radius: 3px;
+}
+
+.cardFooter {
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.viewBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.2s ease;
+}
+
+.card:hover .viewBtn {
+  color: var(--accent, var(--orange));
+}
+
+.viewBtn svg {
+  transition: transform 0.2s ease;
+}
+
+.viewBtn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 5rem 0; }
+  .card { padding: 1.5rem 1.5rem 1.3rem; }
+}

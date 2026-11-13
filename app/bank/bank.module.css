@@ -1,0 +1,866 @@
+/* Bank Dashboard Design System & Variables */
+.container {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  padding: 2rem 4%;
+  font-family: var(--font-inter);
+}
+
+/* ─── Header ─── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  color: #00F59B;
+  filter: drop-shadow(0 0 8px rgba(0, 245, 155, 0.4));
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #FFF 30%, #00F59B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+}
+
+.backBtn:hover {
+  color: #00F59B;
+  border-color: #00F59B;
+  background: rgba(0, 245, 155, 0.05);
+  box-shadow: 0 0 15px rgba(0, 245, 155, 0.1);
+  transform: translateX(-3px);
+}
+
+.resetBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ff5555;
+  border: 1px solid rgba(255, 85, 85, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 85, 85, 0.02);
+  transition: all 0.3s ease;
+}
+
+.resetBtn:hover {
+  color: #fff;
+  border-color: #ff5555;
+  background: rgba(255, 85, 85, 0.15);
+  box-shadow: 0 0 15px rgba(255, 85, 85, 0.1);
+}
+
+/* ─── Overview Stats Grid ─── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.statCard {
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  border-color: rgba(0, 245, 155, 0.25);
+  transform: translateY(-2px);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.statVal {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.statValGreen {
+  color: #00F59B;
+  text-shadow: 0 0 10px rgba(0, 245, 155, 0.15);
+}
+
+.statValRed {
+  color: #FF6B6B;
+}
+
+.statSub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+/* ─── Dashboard Main Body Grid ─── */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.leftCol, .rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ─── Cards & Sections ─── */
+.sectionCard {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionTitle svg {
+  color: #00F59B;
+}
+
+/* ─── Account Grid ─── */
+.accountsList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.accountCard {
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  padding: 1.25rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.accountCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.accountCardActive {
+  background: rgba(0, 245, 155, 0.04);
+  border-color: rgba(0, 245, 155, 0.4);
+  box-shadow: 0 0 15px rgba(0, 245, 155, 0.08);
+}
+
+.accMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  align-items: flex-start;
+}
+
+.accName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.accType {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #00F59B;
+  background: rgba(0, 245, 155, 0.1);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.accNo {
+  font-size: 0.72rem;
+  font-family: monospace;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.accBal {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.accountCardActive .accBal {
+  color: #00F59B;
+}
+
+/* ─── Create Account Section ─── */
+.createForm {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.inputLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.inputField, .selectField {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.inputField:focus, .selectField:focus {
+  border-color: #00F59B;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 10px rgba(0, 245, 155, 0.15);
+}
+
+.selectField option {
+  background: #111;
+  color: #fff;
+}
+
+.btnAction {
+  background: #00F59B;
+  color: #080808;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btnAction:hover {
+  background: #10B981;
+  box-shadow: 0 0 15px rgba(0, 245, 155, 0.3);
+  transform: translateY(-1px);
+}
+
+.btnActionDisabled {
+  background: var(--glass-border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── Transaction Tabs & Forms ─── */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 1.5rem;
+}
+
+.tabBtn {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tabBtnActive {
+  color: #00F59B;
+  border-bottom-color: #00F59B;
+}
+
+.tabBtn:hover:not(.tabBtnActive) {
+  color: var(--text-secondary);
+}
+
+.txForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.alertSuccess {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.alertError {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* ─── Transaction Ledger (History) ─── */
+.ledgerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.searchBar {
+  position: relative;
+  flex: 1;
+  min-width: 180px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding-left: 2.2rem !important;
+}
+
+.filterGroup {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.filterBtn {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.filterBtnActive {
+  background: rgba(0, 245, 155, 0.08);
+  border-color: rgba(0, 245, 155, 0.3);
+  color: #00F59B;
+}
+
+.ledgerScroll {
+  max-height: 380px;
+  overflow-y: auto;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.ledgerList {
+  display: flex;
+  flex-direction: column;
+}
+
+.ledgerItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.2s ease;
+}
+
+.ledgerItem:last-child {
+  border-bottom: none;
+}
+
+.ledgerItem:hover {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.txMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.txDesc {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.txSub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.txDate {
+  font-family: monospace;
+}
+
+.txAccNo {
+  color: var(--text-secondary);
+}
+
+.txAmount {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.txCredit {
+  color: #00F59B;
+}
+
+.txDebit {
+  color: #FF6B6B;
+}
+
+.emptyLedger {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ─── Interactive Calculators ─── */
+.fdGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .fdGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fdControls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rangeGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rangeHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.rangeVal {
+  color: #00F59B;
+  font-weight: 700;
+}
+
+.sliderInput {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--glass-border);
+  border-radius: 2px;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.sliderInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00F59B;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 245, 155, 0.6);
+  transition: transform 0.1s ease;
+}
+
+.sliderInput::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.fdResult {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chartContainer {
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  padding: 0.5rem 1rem 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.chartCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chartBar {
+  width: 100%;
+  max-width: 45px;
+  border-radius: 6px 6px 0 0;
+  min-height: 10px;
+  transition: height 0.4s var(--ease-out-expo);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.barPrincipal {
+  background: linear-gradient(to top, #333, #666);
+  border: 1px solid var(--glass-border);
+}
+
+.barInterest {
+  background: linear-gradient(to top, #00C875, #00F59B);
+  box-shadow: 0 0 15px rgba(0, 245, 155, 0.25);
+}
+
+.barLabel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fdDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.fdDetailItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.fdDetailLabel {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.fdDetailVal {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.fdHighlight {
+  color: #00F59B;
+  font-size: 1.1rem;
+}
+
+/* ─── Loan Eligibility Simulator ─── */
+.loanForm {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .loanForm {
+    grid-template-columns: 1fr;
+  }
+}
+
+.loanResult {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  animation: slideDown 0.3s ease;
+}
+
+.loanApproved {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #10B981;
+}
+
+.loanRejected {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+}
+
+.loanResultTitle {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.loanResultDesc {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.loanCalculations {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.5rem;
+}
+
+.loanCalcItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.loanCalcLabel {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.loanCalcVal {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ─── Visual Analytics (SVG Chart) ─── */
+.chartWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin-top: 1rem;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chartPathBg {
+  fill: none;
+  stroke: rgba(0, 245, 155, 0.06);
+  stroke-width: 3.5;
+}
+
+.chartPath {
+  fill: none;
+  stroke: url(#chart-grad);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 4px 10px rgba(0, 245, 155, 0.35));
+}
+
+.chartFill {
+  fill: url(#chart-area-grad);
+}
+
+.chartGridLine {
+  stroke: rgba(245, 245, 240, 0.05);
+  stroke-width: 1;
+}
+
+.chartDot {
+  fill: #080808;
+  stroke: #00F59B;
+  stroke-width: 3.5;
+  transition: r 0.2s ease;
+  cursor: pointer;
+}
+
+.chartDot:hover {
+  r: 7;
+}
+
+.chartTooltip {
+  position: absolute;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid #00F59B;
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  pointer-events: none;
+  font-size: 0.75rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.2s, transform 0.2s;
+  opacity: 0;
+}
+
+.chartTooltipLabel {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.chartTooltipVal {
+  color: #00F59B;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.chartXAxis {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 0;
+  font-size: 0.65rem;
+  font-family: monospace;
+  color: var(--text-muted);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ─── Keyframe Animations ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .accountsList {
+    grid-template-columns: 1fr;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

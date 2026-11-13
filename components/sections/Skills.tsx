@@ -17,13 +17,23 @@ const SKILLS = [
     ],
   },
   {
+    category: 'Backend & Frameworks',
+    icon: '⚙',
+    items: [
+      { name: 'Spring Boot',    level: 80 },
+      { name: 'Node.js/Express', level: 82 },
+      { name: 'FastAPI',        level: 84 },
+      { name: 'REST APIs',      level: 86 },
+    ],
+  },
+  {
     category: 'Web Technologies',
     icon: '◈',
     items: [
       { name: 'HTML',        level: 88 },
       { name: 'CSS',         level: 88 },
+      { name: 'JavaScript',  level: 84 },
       { name: 'React.js',    level: 85 },
-      { name: 'FastAPI',     level: 84 },
     ],
   },
   {
@@ -31,8 +41,9 @@ const SKILLS = [
     icon: '⬡',
     items: [
       { name: 'MySQL',       level: 80 },
-      { name: 'H2',          level: 78 },
+      { name: 'PostgreSQL',  level: 80 },
       { name: 'Supabase',    level: 80 },
+      { name: 'H2',          level: 78 },
     ],
   },
   {
@@ -51,7 +62,8 @@ const SKILLS = [
 
 const CERTS = [
   { name: 'Top 6 — IBM SkillsBuild Hackathon', org: 'South Regional Level', icon: '🏆' },
-  { name: 'Java Full Stack Certification', org: 'Wipro TalentNext', icon: '✦' },
+  { name: '1st Prize — PALS INOWAH Hackathon', org: 'Industry-Level Hackathon', icon: '🏆' },
+  { name: 'Java Full Stack Certification', org: 'Wipro TalentNext', icon: '✦', link: '/TNext-SE-2026-J_260661104_Malasani%20Karthik%20Kumar%20Reddy.pdf' },
   { name: 'Machine Learning Specialization', org: 'DeepLearning.AI & Stanford University · Coursera', icon: '✦' },
   { name: 'Fundamentals of AI', org: 'IBM SkillBuild', icon: '✦' },
   { name: 'Java Foundation Skills', org: 'Infosys Springboard', icon: '✦' },
@@ -131,15 +143,37 @@ export default function Skills() {
         <div data-skill className={styles.certs}>
           <h3 className={styles.certsTitle}>Certifications &amp; Achievements</h3>
           <div className={styles.certGrid}>
-            {CERTS.map((c) => (
-              <div key={c.name} className={`${c.icon === '🏆' ? styles.certCardHighlight : styles.certCard} glass-card`}>
-                <span className={styles.certIcon}>{c.icon}</span>
-                <div>
-                  <span className={styles.certName}>{c.name}</span>
-                  <span className={styles.certOrg}>{c.org}</span>
+            {CERTS.map((c) => {
+              const className = `${c.icon === '🏆' ? styles.certCardHighlight : styles.certCard} glass-card`
+              const content = (
+                <>
+                  <span className={styles.certIcon}>{c.icon}</span>
+                  <div>
+                    <span className={styles.certName}>{c.name}</span>
+                    <span className={styles.certOrg}>
+                      {c.org}
+                      {c.link && <span style={{ marginLeft: '0.4rem', color: 'var(--orange)' }}>↗</span>}
+                    </span>
+                  </div>
+                </>
+              )
+              return c.link ? (
+                <a
+                  key={c.name}
+                  href={c.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={className}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  {content}
+                </a>
+              ) : (
+                <div key={c.name} className={className}>
+                  {content}
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </div>
